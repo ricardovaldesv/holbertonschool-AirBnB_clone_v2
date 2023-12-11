@@ -23,3 +23,13 @@ class Place(BaseModel, Base):
     reviews = relationship("Review",
                            backref="place",
                            cascade="all, delete-orphan")
+
+    @property
+    def reviews(self):
+        from models import storage
+        reviews_list = []
+        all_reviews = storage.all(Review)
+        for review in all_reviews.values():
+            if review.place_id == self.id:
+                reviews_list.append(review)
+        return reviews_list
