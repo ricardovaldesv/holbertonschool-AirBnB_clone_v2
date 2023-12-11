@@ -136,7 +136,7 @@ class HBNBCommand(cmd.Cmd):
                             new_attr1 = attr_value.strip('"')
                             new_attr2 = new_attr1.replace("_", " ")
                             setattr(new_instance, attr_name, new_attr2)
-            storage.save()
+            new_instance.save()
             print(new_instance.id)
         else:
             if not args:
@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
                 return
             new_instance = HBNBCommand.classes[args[0]]()
-            storage.save()
+            new_instance.save()
             print(new_instance.id)
 
     def help_create(self):
@@ -229,11 +229,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)

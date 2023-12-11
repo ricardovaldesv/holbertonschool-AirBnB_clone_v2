@@ -7,6 +7,18 @@ class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     __file_path = 'file.json'
     __objects = {}
+    
+    def cities(self, state):
+        """
+        Getter attribute that returns a list of City instances
+        with state_id equals to the current State.id
+        """
+        from models.city import City  # Importar la clase City aquí
+        city_instances = []
+        for obj_key, obj in self.all().items():
+            if isinstance(obj, City) and obj.state_id == state.id:
+                city_instances.append(obj)
+        return city_instances
 
     def all(self, cls=None):
         """Returns a dictionary of models currently in storage"""
