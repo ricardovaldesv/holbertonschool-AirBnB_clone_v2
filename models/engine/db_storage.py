@@ -8,7 +8,7 @@ from sqlalchemy import create_engine
 import os
 from sqlalchemy import MetaData
 from sqlalchemy.orm import scoped_session, sessionmaker
-# from models.user import User
+from models.user import User
 from models.state import State
 from models.city import City
 # from models.amenity import Amenity
@@ -50,7 +50,7 @@ class DBStorage:
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
                 objects[key] = obj
         else:
-            classes = [State, City]
+            classes = [State, City, User]
             for cls in classes:
                 query = self.__session.query(cls).all()
                 for obj in query:
