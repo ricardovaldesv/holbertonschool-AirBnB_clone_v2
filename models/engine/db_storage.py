@@ -11,7 +11,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 from models.user import User
 from models.state import State
 from models.city import City
-# from models.amenity import Amenity
+from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 from os import getenv
@@ -50,7 +50,7 @@ class DBStorage:
                 key = "{}.{}".format(obj.__class__.__name__, obj.id)
                 objects[key] = obj
         else:
-            classes = [State, City, User, Place, Review]
+            classes = [State, City, User, Place, Review, Amenity]
             for cls in classes:
                 query = self.__session.query(cls).all()
                 for obj in query:
