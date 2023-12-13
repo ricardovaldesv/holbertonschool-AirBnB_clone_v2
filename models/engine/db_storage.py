@@ -33,11 +33,6 @@ class DBStorage:
                                               host, database,
                                               pool_pre_ping=True))
 
-        """if os.environ.get('HBNB_ENV') == 'test':
-            metadata = MetaData(bind=self.__engine)
-            metadata.reflect()
-            metadata.drop_all()"""
-
         if getenv('HBNB_ENV') == 'test':
             Base.metadata.drop_all(self.__engine)
 
