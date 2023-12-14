@@ -74,7 +74,7 @@ class DBStorage:
                                  sessionmaker(bind=self.__engine,
                                               expire_on_commit=False))
         self.__session = Session()
-    
+
     def close(self):
         """Close the working SQLAlchemy session."""
         self.__session.close()
