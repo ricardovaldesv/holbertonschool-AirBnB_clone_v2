@@ -23,14 +23,17 @@ def states_list():
 
 
 @app.route('/states/<id>', strict_slashes=False)
-def state_id(id):
-    """/states_list route"""
-    states_list = list(storage.all(State).values())
-    states_list = [state for state in states_list if state.id == id]
-    city_list = list(storage.all(City).values())
-    city_list.sort(key=lambda x: x.name)
-    return render_template('9-states.html',
-                           states=states_list, cities=city_list, id=id)
+def state_cities_list(id=None):
+    """/cities_by_states route"""
+    e = None
+    states = storage.all(State)
+    c = list(storage.all(City).values())
+    c.sort(key=lambda x: x.name)
+    if id:
+        key = "State." + id
+        if key in states.keys():
+            e = states[key]
+    return render_template('9-states.html', cities=c, state=e, id=id)
 
 
 if __name__ == '__main__':
